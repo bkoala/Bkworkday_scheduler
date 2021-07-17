@@ -56,9 +56,10 @@ function update_calendar (){
             //Display Row 
          var namearea="No schedule in thepast";
          var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-         var Colt2 = $('<div>').addClass('col-8 col-md-8 past');
-         var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
              Colt2.append(inpuType);
+         var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
+         //var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+          //   Colt2.append(inpuType);
          var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
          var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
              Colt3.append(theSpan);
@@ -78,9 +79,9 @@ function update_calendar (){
       if (ii>=12) {var naMe=ii+"PM";}  
       var namearea="No schedule";
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-      var Colt2 = $('<div>').addClass('col-8 col-md-8 past');
-      var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
-      Colt2.append(inpuType);  
+      var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
+     // var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+     // Colt2.append(inpuType);  
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
       var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
       Colt3.append(theSpan);
@@ -96,9 +97,9 @@ function update_calendar (){
       if (theCurrent >= 12) {var naMe=theCurrent+"PM";}  
      var namearea="No schedule";
      var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-     var Colt2 = $('<div>').addClass('col-8 col-md-8 present');
-     var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
-             Colt2.append(inpuType);
+     var Colt2 = $('<div>').addClass('col-8 col-md-8 present').text(namearea);
+     //var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+      //       Colt2.append(inpuType);
      var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
      var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
      Colt3.append(theSpan);
@@ -117,7 +118,7 @@ function update_calendar (){
       var namearea="No schedule";
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
       var Colt2 = $('<div>').addClass('col-8 col-md-8 future');
-      var inpuType=$('<textarea>').attr("id","text-"+ii).addClass('textarea').attr('type','button').text(namearea);   
+      var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("id","text-"+ii).attr('change','editFunction');   
       Colt2.append(inpuType);
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn').attr('type','button').attr("id","btn-"+ii);
       var theSpan=$('<span>').addClass('glyphicon glyphicon-floppy-save');
@@ -142,38 +143,45 @@ function future_call(){
   for (xx=0; xx<Colvalues.length ; xx++){
     var colId ="#text-"+Colvalues[xx];
     var colEl =document.querySelector(colId);;
-    colEl.addEventListener('click',editFunction);
+    colEl.addEventListener('change',editFunction);
   }
 }
 //Create function to take input from the form on clik of button
 function editFunction(event) {
- 
-  console.log(event.target);
+  var toBesaved =[];
+  //console.log(event.target);
   var element=event.target; 
   var timeIndex=element.id;
   var dayC =timeIndex.split("-")[1];
-  var textAreacontent = element.textContent;
-  console.log("Three is" + textAreacontent);
    var cIndex="#btn-" +dayC;
+   var inpuText = $(this).val();
    var btnEl = document.querySelector(cIndex);
+   //console.log(inpuText);
+ 
+  // var textE1=document.querySelector(timeIndex);
+// Store variables in the Local storage when changed
+
+  //document.getElementById(timeIndex).onchange = function() {myFunction()};
+ 
+  //Add listener to SaveButton
+   //textEl.addEventListener('input',myFunction); 
    btnEl.addEventListener('click',saveFunction); 
 }
+
 //Create function to take input from the form on clik of button and save it in Storage
 function saveFunction(event) {
 
-  console.log(event.target);
-  
+ console.log(event.target);
  // console.log("Three is" + textAreacontent);
- /* var element=event.target; 
-  var saveClick=element.id;
-  var countSave =saveClick.split("-")[1];
+  var element=event.target; 
+ // var saveClick=element.id;
+ // var toBesaved=JSON.parse(localStorage.getItem("toBesaved"));
   //var counT=countC;
-  var timeIndex="#text-" + countSave;
-  console.log( timeIndex);
+ // console.log( toBesaved);
   //Check if id not in Calendar content and put the latest
-   var textAreacontent = element.textContent;;
- //console.log( timeIndex);
- var storedC ={   
+   //var textAreacontent = element.textContent;;
+  //console.log( "Value is "+ textAreacontent);
+ /*var storedC ={   
    timeIndex:timeIndex,
    dayTex: textAreacontent
     };
