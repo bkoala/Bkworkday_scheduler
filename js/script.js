@@ -44,10 +44,15 @@ function compare_time(){
   return 0;
 }
 function update_calendar (){
-  var theCurrent=compare_time();
+    //Determine the columns that one can edit to add schedule
+    var theCurrent=compare_time();
   // Put content in the calendar schedule
-  create_calendarContent();
-
+     create_calendarContent();
+    //Parse content from local stored variable
+    var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
+   console.log("time is " + calendarContent[0].timed);
+   calendarContent[0].textarea=" teh canched";
+   console.log("time is " + calendarContent[0].textarea);
   if (theCurrent === 0){
           // Create a row with past blocks 
           for(ii=9;ii<=17;ii++){
@@ -201,14 +206,11 @@ function saveFunction(event) {
  */
    }
    function create_calendarContent(){
-  /*  if(typeof x !== 'undefined'){
-      // this statement will not execute
-      alert("Variable x is defined.");
-  }*/
-    var storedCalendar=JSON.parse(localStorage.getItem("calendarContent"));
-     if (storedCalendar === null){
+
+    var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
+     if (calendarContent === null){
      calendarContent=[];
-     var textarea="Please click on highlighted green block below to add your hourly schedule";
+    var textarea="Please click on highlighted green block below to add your hourly schedule";
     for(ii=9;ii<=17;ii++){
            var timeC={
               timed:ii,
@@ -216,7 +218,6 @@ function saveFunction(event) {
            }
           calendarContent.push(timeC);
     } 
-    console.log (calendarContent);
     //Store Content in local variable
     localStorage.setItem("calendarContent",JSON.stringify(calendarContent));
    }}
