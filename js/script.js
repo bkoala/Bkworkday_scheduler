@@ -54,9 +54,11 @@ function update_calendar (){
           var naMe=ii+"AM";
           if (ii>=12) {var naMe=ii+"PM";}  
             //Display Row 
-         var namearea="No schedule";
+         var namearea="No schedule in thepast";
          var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-         var Colt2 = $('<div>').addClass('col-8 col-md-8 past').attr("id","text-"+ii).attr("readOnly","readOnly").text(namearea);
+         var Colt2 = $('<div>').addClass('col-8 col-md-8 past');
+         var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+             Colt2.append(inpuType);
          var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
          var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
              Colt3.append(theSpan);
@@ -76,7 +78,9 @@ function update_calendar (){
       if (ii>=12) {var naMe=ii+"PM";}  
       var namearea="No schedule";
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-      var Colt2 = $('<div>').addClass('col-8 col-md-8 past').attr("id","text-"+ii).attr("readonly","readonly").text(namearea);
+      var Colt2 = $('<div>').addClass('col-8 col-md-8 past');
+      var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+      Colt2.append(inpuType);  
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
       var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
       Colt3.append(theSpan);
@@ -92,7 +96,9 @@ function update_calendar (){
       if (theCurrent >= 12) {var naMe=theCurrent+"PM";}  
      var namearea="No schedule";
      var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-     var Colt2 = $('<div>').addClass('col-8 col-md-8 present').attr("id","text-"+ii).attr("readonly","readonly").text(namearea);
+     var Colt2 = $('<div>').addClass('col-8 col-md-8 present');
+     var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
+             Colt2.append(inpuType);
      var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
      var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
      Colt3.append(theSpan);
@@ -110,7 +116,9 @@ function update_calendar (){
       if (ii>=12) {var naMe=ii+"PM";}  
       var namearea="No schedule";
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-      var Colt2 = $('<div>').addClass('col-8 col-md-8 future').attr('type','button').attr("id","text-"+ii).text(namearea);
+      var Colt2 = $('<div>').addClass('col-8 col-md-8 future');
+      var inpuType=$('<textarea>').attr("id","text-"+ii).addClass('textarea').attr('type','button').text(namearea);   
+      Colt2.append(inpuType);
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn').attr('type','button').attr("id","btn-"+ii);
       var theSpan=$('<span>').addClass('glyphicon glyphicon-floppy-save');
       Colt3.append(theSpan);
@@ -140,12 +148,12 @@ function future_call(){
 //Create function to take input from the form on clik of button
 function editFunction(event) {
  
-  //console.log(event.target.textContent);
+  console.log(event.target);
   var element=event.target; 
   var timeIndex=element.id;
   var dayC =timeIndex.split("-")[1];
   var textAreacontent = element.textContent;
-// console.log("Three is" + textAreacontent);
+  console.log("Three is" + textAreacontent);
    var cIndex="#btn-" +dayC;
    var btnEl = document.querySelector(cIndex);
    btnEl.addEventListener('click',saveFunction); 
