@@ -109,7 +109,7 @@ function update_calendar (){
                //Display the rows content of the section      
                sheduleDisplayEl.append(projectRowEl);
      //Display futures for future time.  Allow update to schedule
-     for(ii=(theCurrent+1); ii<18 ;ii++){
+     for(ii=(theCurrent+1); ii<=17 ;ii++){
        //Add index to list of indexes
           Colindex.push(ii) ;
       var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
@@ -154,25 +154,31 @@ function editFunction(event) {
   var timeIndex=element.id;
   var dayC =timeIndex.split("-")[1];
    var cIndex="#btn-" +dayC;
+   //console.log(dayC);
+   //store the changed variable in the input variables
    var inpuText = $(this).val();
    var btnEl = document.querySelector(cIndex);
    //console.log(inpuText);
- 
   // var textE1=document.querySelector(timeIndex);
 // Store variables in the Local storage when changed
-
-  //document.getElementById(timeIndex).onchange = function() {myFunction()};
- 
-  //Add listener to SaveButton
-   //textEl.addEventListener('input',myFunction); 
+  var storedC ={   
+    timeIndex:dayC,
+    dayTex: inpuText
+   };
+  // console.log(storedC);
+//Store content in local Variable
+ toBesaved.push(storedC);
+ localStorage.setItem("toBesaved",JSON.stringify(toBesaved));
+// Add listener to save variables when clicked button
    btnEl.addEventListener('click',saveFunction); 
 }
 
 //Create function to take input from the form on clik of button and save it in Storage
 function saveFunction(event) {
 
- console.log(event.target);
- // console.log("Three is" + textAreacontent);
+  // console.log(event.target);
+ var toBesaved=JSON.parse(localStorage.getItem("toBesaved"));
+  // console.log(toBesaved[0].timeIndex);
   var element=event.target; 
  // var saveClick=element.id;
  // var toBesaved=JSON.parse(localStorage.getItem("toBesaved"));
@@ -193,15 +199,29 @@ function saveFunction(event) {
  console.log( calendarContent);
  */
    }
-   function recordEdit(){
-    var timeIndex=JSON.parse(localStorage.getItem("timeIndex")); 
-    console.log('indes is '. timeIndex);
-    var saveId="text-" +timeIndex;
-    var textAreacontent = document.getElementById(saveId).value;
-    console.log(" TES is " +textAreacontent);
-   }
+   function create_calendarContent(){
+  /*  if(typeof x !== 'undefined'){
+      // this statement will not execute
+      alert("Variable x is defined.");
+  }*/
+  if(calendarContent === null){
+     calendarContent=[];
+     var textarea="Please click on highlighted green block below to add your hourly schedule";
+    for(ii=9;ii<=17;ii++){
+           var timeC={
+              timed=ii,
+              textarea:textarea
+           }
+          calendarContent.push(timeC);
+    } 
+    console.log (calendarContent);
+    //Store Content in local variable
+    localStorage.setItem("calendarContent",JSON.stringify(calendarContent));
+   }}
 // Display the time;
 displayTime();
+//Create content to populate Calendar with shedule information
+create_calendarContent()
 update_calendar ();
 future_call();
 
