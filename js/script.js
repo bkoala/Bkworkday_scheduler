@@ -45,7 +45,8 @@ function compare_time(){
 }
 function update_calendar (){
   var theCurrent=compare_time();
-  
+  // Put content in the calendar schedule
+  create_calendarContent();
 
   if (theCurrent === 0){
           // Create a row with past blocks 
@@ -204,12 +205,13 @@ function saveFunction(event) {
       // this statement will not execute
       alert("Variable x is defined.");
   }*/
-  if(calendarContent === null){
+    var storedCalendar=JSON.parse(localStorage.getItem("calendarContent"));
+     if (storedCalendar === null){
      calendarContent=[];
      var textarea="Please click on highlighted green block below to add your hourly schedule";
     for(ii=9;ii<=17;ii++){
            var timeC={
-              timed=ii,
+              timed:ii,
               textarea:textarea
            }
           calendarContent.push(timeC);
@@ -221,7 +223,6 @@ function saveFunction(event) {
 // Display the time;
 displayTime();
 //Create content to populate Calendar with shedule information
-create_calendarContent()
 update_calendar ();
 future_call();
 
