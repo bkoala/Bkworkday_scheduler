@@ -11,3 +11,8 @@ Red colored blocks indicate that user is the current hour time block
 User can update all future blocks that are green and indicate future events.
 After editing an event user can click the blue save button to update the green block concerned.  The data is updated in the local storage of the event calendar.
 When the user refreshes the page all event saved persist on the page
+
+
+Application Page Link : https://bkoala.github.io/BKworday_scheduler/
+
+Application Screen Shot : ![Screenshot](Sheduler_screenshot.png)
