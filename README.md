@@ -15,4 +15,4 @@ When the user refreshes the page all event saved persist on the page
 
 Application Page Link : https://bkoala.github.io/BKworday_scheduler/
 
-Application Screen Shot : ![Screenshot](Sheduler_screenshot.png)
+Application Screen Shot : ![Screenshot](Scheduler_screenshot.png)
