@@ -31,7 +31,9 @@ function compare_time(){
 function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(currentTime[0] *60)+ currentTime[1];
-  totCurrentime=950;
+  console.log(totCurrentime);
+  //totCurrentime=950;
+ //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
     var timeNow= (ii*60);
@@ -50,9 +52,7 @@ function update_calendar (){
      create_calendarContent();
     //Parse content from local stored variable
     var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
-   //console.log("time is " + calendarContent[0].timed);
-   //calendarContent[0].textarea=" teh canched";
-  // console.log("time is " + calendarContent[0].textarea);
+  //Update calendar content here
   if (theCurrent === 0){
           // Create a row with past blocks 
           for(ii=9;ii<=17;ii++){
@@ -65,10 +65,7 @@ function update_calendar (){
                namearea = "";
               }
          var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-             Colt2.append(inpuType);
          var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
-         //var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
-          //   Colt2.append(inpuType);
          var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
          var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
              Colt3.append(theSpan);
@@ -82,7 +79,7 @@ function update_calendar (){
     { //Store index for future in ColIndex
       var Colindex=[];
      //Display rows that are past the current time
-     //"Please click on highlighted green block below to add your hourly schedule";
+  
      for(ii=9;ii< theCurrent;ii++){
       var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
       var naMe=ii+"AM";
@@ -93,9 +90,7 @@ function update_calendar (){
           namearea = "";
          }
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-      var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
-     // var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
-     // Colt2.append(inpuType);  
+      var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea); 
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
       var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
       Colt3.append(theSpan);
@@ -115,8 +110,6 @@ function update_calendar (){
        }
      var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
      var Colt2 = $('<div>').addClass('col-8 col-md-8 present').text(namearea);
-     //var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
-      //       Colt2.append(inpuType);
      var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
      var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
      Colt3.append(theSpan);
@@ -160,11 +153,12 @@ function update_calendar (){
 function future_call(){
   var Colvalues=JSON.parse(localStorage.getItem("Colindex"));
   //console.log(Colindex + "text ");
+  if ( Colvalues !== null){
   for (xx=0; xx<Colvalues.length ; xx++){
     var colId ="#text-"+Colvalues[xx];
     var colEl =document.querySelector(colId);;
     colEl.addEventListener('change',editFunction);
-  }
+  }}
 }
 //Create function to take input from the form on clik of button
 function editFunction(event) {
