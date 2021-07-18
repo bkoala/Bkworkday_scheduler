@@ -174,12 +174,9 @@ function editFunction(event) {
   var timeIndex=element.id;
   var dayC =timeIndex.split("-")[1];
    var cIndex="#btn-" +dayC;
-   //console.log(dayC);
    //store the changed variable in the input variables
-   var inpuText = $(this).val();
+   var inpuText = $(this).val().trim();
    var btnEl = document.querySelector(cIndex);
-   //console.log(inpuText);
-  // var textE1=document.querySelector(timeIndex);
 // Store variables in the Local storage when changed
   var storedC ={   
     timeIndex:dayC,
@@ -196,28 +193,20 @@ function editFunction(event) {
 //Create function to take input from the form on clik of button and save it in Storage
 function saveFunction(event) {
 
-  // console.log(event.target);
+//Retrive and update calendar contents
  var toBesaved=JSON.parse(localStorage.getItem("toBesaved"));
-  // console.log(toBesaved[0].timeIndex);
-  var element=event.target; 
- // var saveClick=element.id;
- // var toBesaved=JSON.parse(localStorage.getItem("toBesaved"));
-  //var counT=countC;
- // console.log( toBesaved);
-  //Check if id not in Calendar content and put the latest
-   //var textAreacontent = element.textContent;;
-  //console.log( "Value is "+ textAreacontent);
- /*var storedC ={   
-   timeIndex:timeIndex,
-   dayTex: textAreacontent
-    };
-    console.log(storedC);
- //Store content in local Variable
-  calendarContent.push(storedC);
-  localStorage.setItem("fixedcalendarContent",JSON.stringify(calendarContent));
- // var StoredCalendar=JSON.parse(localStorage.getItem("calendarContent")); 
- console.log( calendarContent);
- */
+ var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
+
+ for (ii=0; ii< toBesaved.length ; ii++){
+        var indexV =(toBesaved[ii].timeIndex)-9;
+        var textV = toBesaved[ii].dayTex;
+        //Update the calendar with changes   
+        calendarContent[indexV].textarea= textV;
+        console.log(indexV);
+ }
+ //Local store updated content
+ localStorage.setItem("calendarContent",JSON.stringify(calendarContent));
+ 
    }
    function create_calendarContent(){
 
@@ -240,5 +229,6 @@ function saveFunction(event) {
 displayTime();
 //Create content to populate Calendar with shedule information
 update_calendar ();
+//Identify the values that have changed in the schedule
 future_call();
 
