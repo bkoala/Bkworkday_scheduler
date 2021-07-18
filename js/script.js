@@ -11,28 +11,12 @@ function displayTime() {
   currentDaydisplay.text(rightNow);
 }
 //Find current time and compare to calendar scheduler
-function compare_time(){
-  let currentTime=moment().format("HH:mm").split(":");
-  var totCurrentime=(currentTime[0] *60)+ currentTime[1];
-  totCurrentime=750;
-  // 
-  for(ii=9;ii<=17;ii++){
-    //convert hours to mn
-    var timeNow= (ii*60);
-    var timeLater=timeNow+60;
-    //Compare to current time to find out window of current block
-    if ((totCurrentime >=timeNow) && (totCurrentime<timeLater))
-    {
-      return ii;
-    }
-  }
-  return 0;
-}
+
 function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
   
-  totCurrentime=400;
+  totCurrentime=1400;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
@@ -61,12 +45,14 @@ function update_calendar (){
     //Parse content from local stored variable
     var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
   //Update calendar content here
-  //console.log(theCurrent);
+
   if ( (theCurrent === 8 )||(theCurrent === 18 )){
+        //Clear stored index
+        var Colindex=[];
          if(theCurrent === 18){
           // Create a row with past blocks 
           for(ii=9;ii< theCurrent;ii++){
-            var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
+            var projectRowEl = $('<div>').addClass('row');
             var naMe=ii+"AM";
             if (ii>=12) {var naMe=ii+"PM";}  
             //Check text content
@@ -77,7 +63,7 @@ function update_calendar (){
             var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
             var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea); 
             var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
-            var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
+            var theSpan=$('<i>').attr('fa','fa-thumbs-up');
             Colt3.append(theSpan);
             projectRowEl.append(
                Colt1,Colt2,Colt3
@@ -125,7 +111,7 @@ function update_calendar (){
      //Display rows that are past the current time
   
      for(ii=9;ii< theCurrent;ii++){
-      var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
+      var projectRowEl = $('<div>').addClass('row');
       var naMe=ii+"AM";
       if (ii>=12) {var naMe=ii+"PM";}  
       //Check text content
