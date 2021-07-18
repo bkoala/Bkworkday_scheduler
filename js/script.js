@@ -50,9 +50,9 @@ function update_calendar (){
      create_calendarContent();
     //Parse content from local stored variable
     var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
-   console.log("time is " + calendarContent[0].timed);
-   calendarContent[0].textarea=" teh canched";
-   console.log("time is " + calendarContent[0].textarea);
+   //console.log("time is " + calendarContent[0].timed);
+   //calendarContent[0].textarea=" teh canched";
+  // console.log("time is " + calendarContent[0].textarea);
   if (theCurrent === 0){
           // Create a row with past blocks 
           for(ii=9;ii<=17;ii++){
@@ -60,7 +60,10 @@ function update_calendar (){
           var naMe=ii+"AM";
           if (ii>=12) {var naMe=ii+"PM";}  
             //Display Row 
-         var namearea="No schedule in thepast";
+         var namearea=calendarContent[(ii-9)].textarea;
+             if (namearea === "No"){
+               namearea = "";
+              }
          var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
              Colt2.append(inpuType);
          var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
@@ -79,11 +82,16 @@ function update_calendar (){
     { //Store index for future in ColIndex
       var Colindex=[];
      //Display rows that are past the current time
+     //"Please click on highlighted green block below to add your hourly schedule";
      for(ii=9;ii< theCurrent;ii++){
       var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
       var naMe=ii+"AM";
       if (ii>=12) {var naMe=ii+"PM";}  
-      var namearea="No schedule";
+      //Check text content
+      var namearea=calendarContent[(ii-9)].textarea;
+         if (namearea === "No"){
+          namearea = "";
+         }
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
       var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
      // var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
@@ -101,7 +109,10 @@ function update_calendar (){
      var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
       var naMe=theCurrent+"AM";
       if (theCurrent >= 12) {var naMe=theCurrent+"PM";}  
-     var namearea="No schedule";
+      var namearea=calendarContent[theCurrent-9].textarea;
+      if (namearea === "No"){
+        namearea = "";
+       }
      var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
      var Colt2 = $('<div>').addClass('col-8 col-md-8 present').text(namearea);
      //var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("readonly","readonly");   
@@ -121,7 +132,10 @@ function update_calendar (){
       var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
       var naMe=ii+"AM";
       if (ii>=12) {var naMe=ii+"PM";}  
-      var namearea="No schedule";
+      var namearea=calendarContent[(ii-9)].textarea;
+      if (namearea === "No"){
+       namearea = "Please click on highlighted  current block to make changes to your hourly schedule";
+      }
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
       var Colt2 = $('<div>').addClass('col-8 col-md-8 future');
       var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("id","text-"+ii).attr('change','editFunction');   
@@ -210,8 +224,9 @@ function saveFunction(event) {
     var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
      if (calendarContent === null){
      calendarContent=[];
-    var textarea="Please click on highlighted green block below to add your hourly schedule";
-    for(ii=9;ii<=17;ii++){
+  // Assign a holder value to initiliaze content
+  var textarea="No"  ;
+  for(ii=9;ii<=17;ii++){
            var timeC={
               timed:ii,
               textarea:textarea
