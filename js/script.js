@@ -23,7 +23,7 @@ function compare_time(){
     var timeNow= (ii*60);
     var timeLater=timeNow+60;
     if ((totCurrentime >=timeNow) && (totCurrentime<timeLater))
-    {
+    { //Time between 9am and 5pm
       return ii;
     }
     else if(totCurrentime < 540){
