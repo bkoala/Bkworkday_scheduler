@@ -16,7 +16,7 @@ function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
   
-  totCurrentime=400;
+  totCurrentime=800;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
