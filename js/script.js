@@ -16,7 +16,7 @@ function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
   
-  totCurrentime=800;
+  totCurrentime=400;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
@@ -48,7 +48,7 @@ function update_calendar (){
 
   if ( (theCurrent === 8 )||(theCurrent === 18 )){
         //Clear stored index
-        var Colindex=[];
+       
          if(theCurrent === 18){
           // Create a row with past blocks 
           for(ii=9;ii< theCurrent;ii++){
@@ -101,7 +101,8 @@ function update_calendar (){
                sheduleDisplayEl.append(projectRowEl);
               
          }
-
+         //Store column index
+         localStorage.setItem("Colindex",JSON.stringify(Colindex));
          }
                  
     } 
