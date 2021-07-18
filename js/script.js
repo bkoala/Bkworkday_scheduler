@@ -1,7 +1,8 @@
 // save reference to important DOM elements
 var currentDaydisplay = $('#currentDay');
 var sheduleDisplayEl = $('#schedule-content');
-
+//Clear the list of future list on reload
+localStorage.removeItem("Colindex");
 
 // handle displaying the time
 function displayTime() {
@@ -15,7 +16,7 @@ function displayTime() {
 function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
-  
+  totCurrentime=900;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
@@ -34,7 +35,7 @@ function compare_time(){
       return 18 ;
     }
   }
- // return 0;
+  console.log(totCurrentime);
 }
 function update_calendar (){
     //Determine the columns that one can edit to add schedule
