@@ -13,6 +13,6 @@ After editing an event user can click the blue save button to update the green b
 When the user refreshes the page all event saved persist on the page
 
 
-Application Page Link : https://bkoala.github.io/BKworday_scheduler/
+Application Page Link : https://bkoala.github.io/Bkworkday_scheduler/
 
 Application Screen Shot :![Screenshot](Scheduler_screenshot.png)
