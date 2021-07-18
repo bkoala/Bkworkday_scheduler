@@ -30,9 +30,9 @@ function compare_time(){
 }
 function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
-  var totCurrentime=(currentTime[0] *60)+ currentTime[1];
-  console.log(totCurrentime);
-  //totCurrentime=950;
+  var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
+  
+  totCurrentime=400;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
@@ -42,8 +42,16 @@ function compare_time(){
     {
       return ii;
     }
+    else if(totCurrentime < 540){
+      //Curent time is early than 9AM
+      return 8;
+    }
+    else if (totCurrentime > 1020){
+      //Current time is past 5 oclock
+      return 18 ;
+    }
   }
-  return 0;
+ // return 0;
 }
 function update_calendar (){
     //Determine the columns that one can edit to add schedule
@@ -53,29 +61,65 @@ function update_calendar (){
     //Parse content from local stored variable
     var calendarContent=JSON.parse(localStorage.getItem("calendarContent"));
   //Update calendar content here
-  if (theCurrent === 0){
+  //console.log(theCurrent);
+  if ( (theCurrent === 8 )||(theCurrent === 18 )){
+         if(theCurrent === 18){
           // Create a row with past blocks 
-          for(ii=9;ii<=17;ii++){
-          var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
-          var naMe=ii+"AM";
-          if (ii>=12) {var naMe=ii+"PM";}  
-            //Display Row 
-         var namearea=calendarContent[(ii-9)].textarea;
-             if (namearea === "No"){
-               namearea = "";
-              }
-         var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
-         var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea);
-         var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
-         var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
-             Colt3.append(theSpan);
-         projectRowEl.append(
-            Colt1,Colt2,Colt3
-         );
-         //Display the row
-            sheduleDisplayEl.append(projectRowEl);
-         }  
-    } else
+          for(ii=9;ii< theCurrent;ii++){
+            var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
+            var naMe=ii+"AM";
+            if (ii>=12) {var naMe=ii+"PM";}  
+            //Check text content
+            var namearea=calendarContent[(ii-9)].textarea;
+               if (namearea === "No"){
+                namearea = "";
+               }
+            var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
+            var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea); 
+            var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
+            var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
+            Colt3.append(theSpan);
+            projectRowEl.append(
+               Colt1,Colt2,Colt3
+            );
+                      //Display the rows content of the section      
+                      sheduleDisplayEl.append(projectRowEl);
+           }
+        }
+         else if (theCurrent === 8 ){
+           //Store index for future in ColIndex
+           var Colindex=[];
+           //Display for hours when current time less than 9AM
+         
+           for(ii=9; ii<=17 ;ii++){
+            //Add index to list of indexes
+               Colindex.push(ii) ;
+           var projectRowEl = $('<div>').addClass('row').attr("id","row_"+ii);
+           var naMe=ii+"AM";
+           if (ii>=12) {var naMe=ii+"PM";}  
+           var namearea=calendarContent[(ii-9)].textarea;
+           if (namearea === "No"){
+            namearea = "Please click on highlighted  current block to make changes to your hourly schedule";
+           }
+           var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
+           var Colt2 = $('<div>').addClass('col-8 col-md-8 future');
+           var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("id","text-"+ii).attr('change','editFunction');   
+           Colt2.append(inpuType);
+           var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn').attr('type','button').attr("id","btn-"+ii);
+           var theSpan=$('<span>').addClass('glyphicon glyphicon-floppy-save');
+           Colt3.append(theSpan);
+           projectRowEl.append(
+              Colt1,Colt2,Colt3
+           );
+               //Display the rows content of the section      
+               sheduleDisplayEl.append(projectRowEl);
+              
+         }
+
+         }
+                 
+    } 
+    else
     { //Store index for future in ColIndex
       var Colindex=[];
      //Display rows that are past the current time
@@ -117,7 +161,7 @@ function update_calendar (){
         Colt1,Colt2,Colt3
      );
                //Display the rows content of the section      
-               sheduleDisplayEl.append(projectRowEl);
+       sheduleDisplayEl.append(projectRowEl);
      //Display futures for future time.  Allow update to schedule
      for(ii=(theCurrent+1); ii<=17 ;ii++){
        //Add index to list of indexes
