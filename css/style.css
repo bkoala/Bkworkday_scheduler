@@ -68,6 +68,9 @@ textarea {
   background-color: #06aed5;
   color: white;
 }
+.saveBtn i{
+  margin: 20% 40%;
+}
 .no-border {
   border: 0;
   background-color: #d3d3d3;

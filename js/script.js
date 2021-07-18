@@ -16,7 +16,7 @@ function compare_time(){
   let currentTime=moment().format("HH:mm").split(":");
   var totCurrentime=(Number(currentTime[0]) *60)+ Number(currentTime[1]);
   
-  totCurrentime=1400;
+  totCurrentime=800;
  //Find out the current time of day for updates
   for(ii=9;ii<=17;ii++){
     //convert hours to mn
@@ -63,7 +63,7 @@ function update_calendar (){
             var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
             var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea); 
             var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
-            var theSpan=$('<i>').attr('fa','fa-thumbs-up');
+            var theSpan=$('<i>').addClass('fa fa-save');
             Colt3.append(theSpan);
             projectRowEl.append(
                Colt1,Colt2,Colt3
@@ -92,7 +92,7 @@ function update_calendar (){
            var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("id","text-"+ii).attr('change','editFunction');   
            Colt2.append(inpuType);
            var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn').attr('type','button').attr("id","btn-"+ii);
-           var theSpan=$('<span>').addClass('glyphicon glyphicon-floppy-save');
+           var theSpan=$('<i>').addClass('fa fa-save');
            Colt3.append(theSpan);
            projectRowEl.append(
               Colt1,Colt2,Colt3
@@ -122,7 +122,7 @@ function update_calendar (){
       var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
       var Colt2 = $('<div>').addClass('col-8 col-md-8 past').text(namearea); 
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
-      var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
+      var theSpan=$('<i>').addClass('fa fa-save');
       Colt3.append(theSpan);
       projectRowEl.append(
          Colt1,Colt2,Colt3
@@ -141,7 +141,7 @@ function update_calendar (){
      var Colt1 = $('<div>').addClass('col-2 col-md-2 hour').text(naMe);
      var Colt2 = $('<div>').addClass('col-8 col-md-8 present').text(namearea);
      var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn');
-     var theSpan=$('<span>').addClass('glyphicon-floppy-disk');
+     var theSpan=$('<i>').addClass('fa fa-save');
      Colt3.append(theSpan);
      projectRowEl.append(
         Colt1,Colt2,Colt3
@@ -164,7 +164,7 @@ function update_calendar (){
       var inpuType=$('<textarea>').addClass('textarea').text(namearea).attr("id","text-"+ii).attr('change','editFunction');   
       Colt2.append(inpuType);
       var Colt3 = $('<div>').addClass('col-2 col-md-2 saveBtn').attr('type','button').attr("id","btn-"+ii);
-      var theSpan=$('<span>').addClass('glyphicon glyphicon-floppy-save');
+      var theSpan=$('<i>').addClass('fa fa-save');
       Colt3.append(theSpan);
       projectRowEl.append(
          Colt1,Colt2,Colt3
