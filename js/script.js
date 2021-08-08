@@ -187,7 +187,7 @@ function future_call(){
   if ( Colvalues !== null){
   for (xx=0; xx<Colvalues.length ; xx++){
     var colId ="#text-"+Colvalues[xx];
-    var colEl =document.querySelector(colId);;
+    var colEl =document.querySelector(colId);
     colEl.addEventListener('change',editFunction);
   }}
 }
